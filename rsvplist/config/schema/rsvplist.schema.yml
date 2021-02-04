@@ -1,0 +1,11 @@
+#Schema for the configuration file of rsvplist module
+rsvplist.settings:
+  tpe: config_object
+  label: 'RSVP List Content Type Settings'
+  mapping:
+    allowed_types:
+      type: sequence
+      lael: 'Content types RSVP Form can discplay on'
+      sequence:
+        type: string
+        label: 'Content type'

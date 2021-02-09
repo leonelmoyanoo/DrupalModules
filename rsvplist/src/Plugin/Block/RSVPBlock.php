@@ -23,7 +23,7 @@ class RSVPBlock extends BlockBase {
   */
 
   public function build(){
-    
+
     //return array('#markup' => $this->t('My RSVP List Block'));
     return \Drupal::formBuilder()->getForm('Drupal\rsvplist\Form\RSVPForm');
   }
@@ -32,11 +32,12 @@ class RSVPBlock extends BlockBase {
     /**
      * @var \Drupal\node\Entity\Node $node
      */
-    $node = \Drupal::routeMatch()->getParameter('node');
-    //$nid = $node->nid->value;
-    $nid = 1;
+    $nid = 0;
+    if($node = \Drupal::routeMatch()->getParameter('node')){
+      $nid = $node->nid->value;
+    }
     if (is_numeric($nid)) {
-      
+
       return AccessResult::allowedIfHasPermission($account, 'view rsvplist');
     }
     return AccessResult::forbidden();

@@ -21,14 +21,15 @@ class RSVPForm extends FormBase {
 
    return 'rsvplist_email_form';
   }
-  
+
   /**
   * (@inheritdoc)
   */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $node = \Drupal::routeMatch()->getParameter('node');
-		//$nid = $node->id;
-		$nid = 3;
+    $nid = 0;
+    if ($node = \Drupal::routeMatch()->getParameter('node')) {
+      $nid = $node->id;
+    }
     $form['email'] = array(
       '#title' => t('Email Address'),
       '#type' => 'textfield',
@@ -46,7 +47,7 @@ class RSVPForm extends FormBase {
     );
     return $form;
 	}
-	
+
 	/**
 	 * (@inheritdoc)
 	 */
@@ -68,7 +69,7 @@ class RSVPForm extends FormBase {
       // We found a row with this nid and email.
       $form_state->setErrorByName('email', t('The address %mail is already subscribed to this list.'),array('%mail' => $value));
     }
-    
+
 	}
   /**
   * (@inheritdoc)
